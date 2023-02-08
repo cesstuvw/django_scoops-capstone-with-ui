@@ -1,0 +1,66 @@
+{% extends 'admin_site/base.html' %}
+
+{% block title %}
+    add stock
+{% endblock title %}
+
+{% block content %}
+
+
+
+{% for messsage in messages  %}
+<p class='alert alert-success mt-3'>{{messsage}}</p>
+{% endfor %}
+<form action="{% url 'admin_site:search_inventory' %}" method="GET" class="my-2">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" class="form-control" name="search" placeholder="search" required>
+        <div class="input-group-append">
+            <button class="btn btn-success" type="submit">Search</button>
+        </div>
+    </div>
+</form>
+    
+    
+{% if list_products %}
+<table class="table table-hover text-center">
+    
+    <thead>
+    <tr>
+        <th>Product Code</th>
+        <th>Product Name </th>
+        <th>Batch Number</th>
+        <th>Quantity</th>
+        <th>Expiry Date</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>  
+        {% for list in list_products %}   
+    <tr>
+        <td><a href="{% url 'admin_site:view_product' list.id %}" class="text-decoration-none">{{ list.product_code }}</a></td>
+        <td>{{ list.product_name }}</td>
+
+    <form action="{% url 'admin_site:update_inventory'  list.id %}" method="POST">
+        {% csrf_token %}
+        <td><input type="number" name="batch_no" placeholder="Enter the  batch number" required></td>
+        <td><input type="number" name="quantity" style="text-align:right;" placeholder="0" required></td>
+
+        <td><input type="date" name="expdate" required></td>
+        <td><input type="submit" value="add" class="btn btn-dark"></td>
+        <input type="hidden" value="{{ list.product_stock }}" name="stock" >
+        <input type="hidden" value="{{ list.product_code }}" name="product_code">
+        <input type="hidden" value="{{ list.product_name }}" name="product_name">
+
+    </form>
+
+    </tr>
+    {% endfor %}
+            
+    </tbody>
+</table>
+{% endif %}
+
+
+{% endblock content %}
+    

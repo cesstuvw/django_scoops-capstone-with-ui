@@ -1,0 +1,33 @@
+{% extends 'admin_site/base.html' %}
+
+
+{% block content %}
+    
+   
+   {% for message in  messages %}
+    <p class="alert alert-success  mt-3">{{ message }}</p>
+   {% endfor %}
+  
+    
+    <form action="{% url 'admin_site:add_product' %}" method="POST" class="text-center">
+        {% csrf_token %}
+        <h1>Add Product</h1>    
+
+  
+    
+    <input type="text" placeholder="Enter Product Name" name="product_name" class="form-control">
+    <br>
+    <input type="text" placeholder="Enter Product Category" name="category" class="form-control">
+    <br>
+    <input type="text" placeholder="Enter Product Unit" name="unit" class="form-control">
+    <br>
+    <input type="number" placeholder="Enter Reseller Price" name="reseller_price" class="form-control">
+    <br>
+    <input type="number" placeholder="Enter Pos Price" name="price" class="form-control" >
+    <br>
+
+ 
+    <input type="submit" class="btn btn-dark" value="Add Product">
+    </form>    
+{% endblock content %}
+    

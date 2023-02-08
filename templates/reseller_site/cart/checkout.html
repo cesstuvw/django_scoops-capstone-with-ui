@@ -1,0 +1,92 @@
+{% extends 'admin_site/base.html' %}
+
+
+{% block content %}
+
+{% load static %}
+
+{% if list_cart %}
+    
+<table class="table table-hover text-center">
+        <p class="fw-bolder">Order Summary: ({{ total_item }})</p>
+    
+    <thead>
+        <tr>
+            <th>Product Category</th>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        {% for list in list_cart %}
+        <tr>
+            <td>{{ list.pos_category }}</td>
+            <td>{{ list.pos_name }}</td>
+            <td>{{ list.pos_quantity }}</td>
+            <td>{{ list.pos_amount }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+    <div class="text-end px-5">
+        <label style="font-weight: bolder;" > Grand Total:    {{ sum_amount.data }} </label>
+    </div>
+    <br>
+    <br>
+    <form action="{% url 'reseller_site:checkout' %}" method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="total_amount"value="{{ sum_amount.data }}">
+        <h1 class="text-center" id="bdetails">Basic Details</h1>
+        <label for="" id="fname">First Name</label>
+        <input type="text" placeholder="Enter your First Name" class="form-control" name="fname" required>
+        <br> 
+        <label for="">Last Name</label>
+        <input type="text" placeholder="Enter your Last Name" class="form-control" name="lname" required>
+        <br> 
+        <label for="">Address</label>
+        <input type="text" placeholder="Enter your Address" class="form-control" name="address" required>
+   
+        <br>
+        <label for="">contact No</label>
+        <input type="text" placeholder="Enter your contact number" class="form-control" name="contact_no" required>
+
+        <br> 
+        <label for="" id="doption">Delivery option</label>
+        <select  class="form-control" id="option" name="option"  required>
+            <option></option>
+            <option value="pickup">Pickup</option>
+            <option value="delivery">Delivery</option>
+        </select>
+        <br>
+
+        <!-- wag tatangglim yung div! nakakamamatay -->
+        <div id="pdate" style="display: none;">
+            <div id="date_deliver">
+                <h3 id="h3_date">Preferred Delivery date</h3>
+                <input type="date" id="input_date" name="prefer_date" class="form-control">
+            </div>
+            <br>
+            <br>
+            <div id="no_specific">
+                <h3>No Specific Date</h3>
+                <input type="checkbox" id="checkbox_no_date"  name="specific_date" >
+            </div>
+        </div>
+        <br>
+        <br>
+        <input type="submit" class="btn btn-success" value="Place Order">
+
+        <br>
+        <br>
+    </form>
+{% endif %}    
+
+
+<script src="{% static 'js/checkout.js' %}"></script>
+
+
+
+{% endblock content %}
+    

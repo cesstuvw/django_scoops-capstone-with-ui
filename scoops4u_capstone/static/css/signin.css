@@ -1,0 +1,273 @@
+/* Font */
+@font-face {
+    font-family: P-Thin;
+    src: url(../font/Poppins-Thin.ttf);
+}
+
+@font-face {
+font-family: P-Light;
+src: url(../font/Poppins-Light.ttf);
+}
+
+@font-face {
+font-family: P-ExtraLight;
+src: url(../font/Poppins-ExtraLight.ttf);
+}
+
+@font-face {
+font-family: P-Mono;
+src: url(../font/Poppins-Regular.ttf);
+}
+
+@font-face {
+font-family: P-Medium;
+src: url(../font/Poppins-Medium.ttf);  
+}
+
+@font-face {
+font-family: P-Bold;
+src: url(../font/Poppins-Bold.ttf);
+}
+
+@font-face {
+font-family: P-SemiBold;
+src: url(../font/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+font-family: P-ExtraBold;
+src: url(../font/Poppins-ExtraBold.ttf);
+}
+
+@font-face {
+font-family: P-Black;
+src: url(../font/Poppins-Black.ttf);
+}
+
+html {
+scroll-behavior: smooth;
+height: 100%;
+}
+
+
+/* ::-webkit-scrollbar {
+background-color: transparent;
+width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+background-color: var(--primary-c-blue);
+} */
+
+
+::-webkit-scrollbar {
+display: none; 
+}
+
+:root{
+/* general */
+--primary-c-black: #151515;
+--primary-c-white: #F9F9F9;
+--primary-c-white-text: #FFF;
+--primary-c-grey-text: #9AAAC7;
+--primary-c-blue: #001BDE;
+--primary-c-l-blue: #BBC2F2;
+--primary-c-d-blue: #0B2E8A;
+--primary-c-dark-blue: #254070;
+
+/* colors */
+--c-grey: #565656;
+--c-d-purple: #99A2E1;
+--c-l-purple: #e1e3f37a;
+
+--c-dark-pink: #E288B8;
+--c-light-pink: #FFAED9;
+--c-lighter-pink: #FCD7EB;
+--c-light-peach: #F6D7DD;
+
+/* bg */
+--bg-c-gray-blue: #F2F5FD;
+--bg-c-gray: #E4E9F4;
+
+}
+
+*{
+margin: 0;
+padding: 0;
+text-decoration: none !important;
+}
+
+body {
+font-family: P-ExtraLight;
+height: 100%;
+}
+
+/* <!-- ================== START SIGN IN ==================== -->*/
+#sign-in{
+    background-color: var(--primary-c-blue) !important;
+    height: 100vh;
+    display: flex;
+    justify-items: center;
+    align-items: flex-end;
+    }
+
+/* LEFT */
+.main-left{
+    /* align-self: flex-end !important; */
+    padding-left: 15px;
+    padding-right: 15px;
+} 
+
+.left-sign{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: var(--primary-c-white);
+    border-top-left-radius: 900px;
+    border-top-right-radius: 900px;
+    height: 92vh;
+    padding-top: 125px;
+    color: var(--primary-c-blue);
+}
+
+.title-sign{
+    font-family: P-ExtraBold;
+    font-size: 50px;
+    /* margin-bottom: 95px !important; */
+}
+
+.sign-desc p{
+    font-family: P-ExtraLight;
+    font-size: 20px;
+    line-height: 22px;
+    color: var(--primary-c-black);
+}
+
+.sign-desc span{
+    font-family: P-SemiBold;
+}
+
+.form-control{
+    border: 2px solid var(--c-d-purple);
+    border-radius: 95px;
+    margin-bottom: 12px !important;
+}
+
+.input-r{
+    position: relative;
+}
+
+.input-r i{
+    position: absolute;
+    top: 20%;
+    right: 10%;
+}
+
+.input-r input{
+    font-family: P-Medium;
+    font-size: 16px !important;
+} 
+
+.input-r input::placeholder{
+    color: var(--primary-c-grey-text);
+}
+
+.left button{
+display: block;
+width: 100%;
+border-radius: 50px;
+border: 2px solid var(--c-light-d-purple);
+font-family: P-Medium;
+}
+
+.remember{
+font-family: P-Medium;
+font-size: 12px;
+}
+
+.signin-btn{
+background-color: var(--primary-c-blue);
+border: 2px solid var(--primary-c-blue);
+border-radius: 95px;
+color: var(--primary-c-white-text);
+font-family: P-ExtraBold;
+width: 100%;
+padding: 6.5px;
+} 
+
+.forgot{
+font-family: P-Medium;
+font-size: 12px;
+color: var(--primary-c-grey-text);
+display: flex;
+align-items: center;
+justify-content: center;
+line-height: 15px;
+}
+
+.forgot p{
+max-width: 65%;
+}
+
+.forgot span,
+.forgot a{
+color: var(--primary-c-blue) !important;
+} 
+
+
+/* RIGHT */
+.right-sign{
+display: flex;
+align-items: center;
+justify-content: center;
+text-align: center;
+color: var(--primary-c-white-text);
+}
+
+.main-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.right-sign .col{
+margin-bottom: 25px;
+}
+
+.text-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: P-ExtraLight !important;
+}
+
+.text-container h3{
+    max-width: 65%;
+    font-size: 30px;
+}
+
+.text-container span{
+    font-family: P-SemiBold;
+}
+
+.bottom-text{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 125px;
+}
+
+.bottom-text *{
+    text-transform: uppercase;
+    text-decoration: none;
+    font-family: P-Black !important;
+    color: var(--primary-c-white-text);
+    font-size: 15px;
+}
+
+/* <!-- ================== END SIGN IN ==================== -->*/

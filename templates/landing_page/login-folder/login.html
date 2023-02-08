@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- Bootstrap and JS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+   <script src=" https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+
+   <!-- Vendors -->
+   <link href="{% static '/css/assets/remixicon/remixicon.css'%}" rel="stylesheet">
+
+   <!-- Main CSS -->
+   <link href="{% static '/css/signin.css'%}" rel="stylesheet">
+   <title>SCOOPS 4 U</title>
+   <link rel="icon" href="{% static '/img/icon.ico'%}">
+</head>
+<body>
+   <section id="sign-in">
+      <div class="container"> 
+         <div class="row">
+            <div class="col-lg-6 text-center main-left">
+               <div class="left-sign mx-5 flex-column">
+                  <div class="d-lg-none mb-3">
+                     <img src="static/svg/logo-mobile.svg" alt="logo">
+                  </div>
+                  <!-- <form method="POST" class="col-lg-3"> -->
+                     <!-- ERROR - CSRF verification failed. Request aborted.-->
+                  <form action="{% url 'landing_page:login' %}" method="POST" class="col-lg-6">
+                     <h1 class="mb-4 pb-2 title-sign">sign in</h1>
+                     <div class="sign-desc text-center mb-5">
+                        <p class="mb-0">Hello! Please <span class="text-sb">sign in</span> with your account</p>
+                     </div>
+                     <div class="input-r">
+                           <input class="px-4 form-control" type="text" name="username" placeholder="Email or Username" >
+                           
+                     </div>
+                     <div class="input-r">
+                        <input class="px-4 form-control" type="password" name="password" placeholder="Password" >
+                        <i class="ri-eye-fill"></i>   
+                     </div>
+                     <!-- <div class="my-3 ms-3 text-start remember">
+                        <input type="checkbox" id="remember" name="remember" value="Remember Me" class="align-middle"> 
+                        <label for="remember" class="ps-1">Remember Me</label>
+                     </div> -->
+                     {% csrf_token %}
+   
+                     {% for messsage in messages  %}
+                     <p class='alert alert-danger mt-3'>{{messsage}}</p>
+                     {% endfor %}
+                     <button  class="signin-btn mt-2 mb-5" type="submit" name="submit">sign in</button>
+
+                     <!-- <div class="d-lg-none mb-3">
+                        <div class="bottom-text mobile-view  ">
+                           <h3>scoops 4 u</h3>
+                        </div>
+                     </div> -->
+                     <div class="forgot">
+                        <p>Forgot your sign in details? <span><a href="">Get help signing in.</a></span>
+                        
+                        </p>
+                     </div>
+                  </form>
+               </div>
+            </div>
+            <div class="col-lg-6 text-center main-right">
+               <div class="right-sign flex-column">
+                  <a href="{% url 'landing_page:landing_site' %}"><img class="my-3 py-3" src="../../../static/img/logo.svg" alt="logo"></a>
+                  <div class="text-container">
+                     <h3>Happy <span>scoops</span> for everyone!</h3>
+                  </div>
+                  <div class="bottom-text">
+                     
+                     <a href="{% url 'landing_page:landing_site' %}">scoops 4 u</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <!-- <div class=" justify-content-center"> -->
+      <!-- <h1 class="text-center">Welcome To Login</h1>
+      <form action="{% url 'landing_page:login' %}" method="POST">
+         {% csrf_token %}
+   
+         {% for messsage in messages  %}
+         <p class='alert alert-success mt-3'>{{messsage}}</p>
+         {% endfor %}
+          
+        
+       <label for="">Username</label>
+       <input type="text" name="username" class="form-control" placeholder="Enter your Username">
+       <br>
+   
+       <label for="">Password</label>
+       <input type="password" name="password" class="form-control" placeholder="Enter your Password">
+       <br>
+   
+     
+       <button type="submit" name="submit"class="btn btn-dark">Login</button>
+       <br>
+      </form> -->
+   <!-- </div>-->
+
+   <!-- Bootstrap -->
+   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+
+   <!-- Template Main JS File -->
+   <script src="../../../static/css/assets/js/main.js"></script>
+</body>
+</html>

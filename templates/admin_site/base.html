@@ -1,0 +1,629 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Vendors -->
+    <!-- <link href="../../static/css/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link href="{% static '/css/assets/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+    <link href="{% static '/css/assets/simple-datatables/style.css'%}" rel="stylesheet">
+    <link href="{% static '/css/assets/remixicon/remixicon.css'%}" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <!-- <link href="../../static/css/sandi.css" rel="stylesheet"> -->
+    <link href="{% static '/css/sandi.css'%}" rel="stylesheet">
+    <title>
+      {% block title %}
+        SCOOPS 4 U
+      {% endblock title %}
+    </title>
+    <!-- <link rel="icon" href="../../static/img/icon.ico"> -->
+    <link rel="icon" href="{% static '/img/icon.ico'%}">
+  </head>
+
+<body>
+{% if user.role == "admin"%}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="{% url 'admin_site:dashboard'%}" class="logo d-flex align-items-center">
+      <img src="{% static '/img/logo-header.svg'%}" alt="">
+      <span class="d-none d-lg-block">SCOOPS 4 U</span>
+    </a>
+    <i class="ri-menu-4-line toggle-sidebar-btn ms-1 me-3" style="font-size: 20px; font-weight: 500; color:#001BDE;"></i>
+  </div><!-- End Logo -->
+  
+  <div class="search-bar mx-auto">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="ri-search-line"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+  
+  <div class="POS POS-header">
+      <a href="{%url 'admin_site:pos' %}">POS</a>
+    </div>
+    <!-- End POS -->
+  
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="ri-search-line"></i>
+        </a>
+      </li><!-- End Search Icon-->
+  
+      <li class="nav-item dropdown pe-3">
+  
+        <a class="nav-link nav-profile d-flex align-items-center me-3" href="#" data-bs-toggle="dropdown">
+          <i alt="Profile" class="ri-checkbox-blank-circle-fill"></i>
+          <span class="d-none d-md-block dropdown-toggle ps-2" style="text-transform: capitalize;">
+            {{ user }}
+          </span>
+        </a><!-- End Profile Image Icon -->
+  
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-2">
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{% url 'admin_site:my_profile' %}">
+              <i class="ri-user-line"></i>              
+              <span>My Profile</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{%  url 'landing_page:logout' %}">
+              <i class="ri-logout-box-r-line"></i>              
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+  
+    </ul>
+  </nav><!-- End Icons Navigation -->
+  
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+          <a class="nav-link collapsed " href="{% url 'admin_site:dashboard'%}">
+          <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Dashboard</span>
+          </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-heading pt-3">Management</li>
+      <li class="nav-item">
+          <a class="nav-link collapsed " data-bs-target="#users-nav" data-bs-toggle="collapse" href="#">
+                <i class="ri-user-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>User Accounts</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="users-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Users List</span>
+                </a>
+                </li>
+                <li>
+                <a href="{% url 'admin_site:list_reseller'%}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Resellers List</span>
+                </a>
+                </li>
+                <li>
+                <a href="{% url 'admin_site:list_inquiry'%}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Requests</span>
+                </a>
+                </li>
+          </ul>
+      </li><!-- End User Accounts Nav -->
+
+      <li class="nav-item">
+      <a class="nav-link collapsed " href="{%url 'admin_site:list_product' %}">
+          <i class="ri-shopping-bag-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Products</span>
+      </a>
+      </li><!-- End Products Page Nav -->
+
+      <li class="nav-item">
+      <a class="nav-link collapsed " data-bs-target="#inventory-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri-inbox-archive-line"style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Inventory</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+      </a>
+      <ul id="inventory-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+                <a href="{%url 'admin_site:inventory' %}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Add Stock</span>
+                </a>
+          </li>
+          <li>
+                <a href="">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>View Stock</span>
+                </a>
+          </li>
+      </ul>
+      </li><!-- End Inventory Page Nav -->
+
+      <li class="nav-item">
+      <a class="nav-link collapsed " data-bs-target="#sales-nav" data-bs-toggle="collapse" href="#">
+          <i class="ri-shopping-cart-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Order</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+      </a>
+      <ul id="sales-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+                <a href="{% url 'admin_site:transaction_orders' %}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Pending</span>
+                </a>
+          </li>
+          <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Out For Delivery</span>
+                </a>
+          </li>
+          <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Delivered</span>
+                </a>
+          </li>
+      </ul>
+      </li><!-- End Sales Nav -->
+
+      <li class="nav-heading pt-3">Reports</li>
+      <li class="mb-act nav-item">
+          <a class="nav-link collapsed " data-bs-target="#reports-nav" data-bs-toggle="collapse" href="#">
+                <i class="ri-file-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Reports</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="reports-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>User Accounts</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Products</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Inventory</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>POS Transactions</span>
+                </a>
+                </li>
+                <li>
+                <a href="#">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Resellers Transactions</span>
+                </a>
+                </li>
+          </ul>
+      </li>
+
+      <li class="nav-heading pt-3">Others</li>
+      <li class="nav-item">
+          <a class="nav-link collapsed " data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
+                <i class="ri-settings-3-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Settings</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="settings-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                <a href="{% url 'admin_site:settings_profile' %}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Edit Profile</span>
+                </a>
+                </li>
+                <li>
+                <a href="{% url 'admin_site:list_archive' %}">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Database</span>
+                </a>
+                </li>
+                <li>
+                <a href="reports-admin/act-logged-out.php">
+                    <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Product Category</span>
+                </a>
+                </li>
+          </ul>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link collapsed ">
+                <i class="ri-information-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Support</span>
+          </a>
+      </li>
+  </ul>
+</aside><!-- End Sidebar-->
+{% endif %}
+
+{% if user.role == "staff"%}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="{% url 'staff_site:dashboard'%}" class="logo d-flex align-items-center">
+      <img src="{% static '/img/logo-header.svg'%}" alt="">
+      <span class="d-none d-lg-block">SCOOPS 4 U</span>
+    </a>
+    <i class="ri-menu-4-line toggle-sidebar-btn ms-1 me-3" style="font-size: 20px; font-weight: 500; color:#001BDE;"></i>
+  </div><!-- End Logo -->
+  
+  <div class="search-bar mx-auto">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="ri-search-line"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+  
+  <div class="POS POS-header">
+      <a href="{%url 'admin_site:pos' %}">POS</a>
+    </div>
+    <!-- End POS -->
+  
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="ri-search-line"></i>
+        </a>
+      </li><!-- End Search Icon-->
+  
+      <li class="nav-item dropdown pe-3">
+  
+        <a class="nav-link nav-profile d-flex align-items-center me-3" href="#" data-bs-toggle="dropdown">
+          <i alt="Profile" class="ri-checkbox-blank-circle-fill"></i>
+          <span class="d-none d-md-block dropdown-toggle ps-2" style="text-transform: capitalize;">
+            {{ user }}
+          </span>
+        </a><!-- End Profile Image Icon -->
+  
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-2">
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{% url 'admin_site:my_profile' %}">
+              <i class="ri-user-line"></i>              
+              <span>My Profile</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{%  url 'landing_page:logout' %}">
+              <i class="ri-logout-box-r-line"></i>              
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+  
+    </ul>
+  </nav><!-- End Icons Navigation -->
+</header><!-- End Header -->
+
+
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'staff_site:dashboard'%}">
+              <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+              <span>Dashboard</span>
+              </a>
+          </li><!-- End Dashboard Nav -->
+
+          <li class="nav-heading pt-3">Management</li>
+
+          <li class="nav-item">
+          <a class="nav-link collapsed" href="{%url 'admin_site:list_product' %}">
+              <i class="ri-shopping-bag-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+              <span>Products</span>
+          </a>
+          </li><!-- End Products Page Nav -->
+
+          <li class="nav-item">
+          <a class="nav-link collapsed" href="{%url 'admin_site:inventory' %}">
+              <i class="ri-inbox-archive-line"style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+              <span>Inventory</span>
+          </a>
+          </li><!-- End Inventory Page Nav -->
+
+          <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#sales-nav" data-bs-toggle="collapse" href="#">
+              <i class="ri-coin-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Sales</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="sales-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+              <a href="#">
+                  <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>POS Transactions</span>
+              </a>
+              </li>
+              <li>
+              <a href="{% url 'admin_site:transaction_orders' %}">
+                  <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Resellers' Orders</span>
+              </a>
+              </li>
+          </ul>
+          </li><!-- End Sales Nav -->
+
+          <li class="nav-heading pt-3">Others</li>
+          <li class="nav-item">
+              <a class="nav-link collapsed" data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
+                  <i class="ri-settings-3-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Settings</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+              </a>
+              <ul id="settings-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                  <li>
+                  <a href="{% url 'admin_site:settings_profile' %}">
+                      <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Edit Profile</span>
+                  </a>
+                  </li>
+              </ul>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link collapsed">
+                  <i class="ri-information-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Support</span>
+              </a>
+          </li>
+  </ul>
+</aside><!-- End Sidebar-->
+{% endif %}
+
+{% if user.role == "reseller"%}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="{% url 'reseller_site:dashboard'%}" class="logo d-flex align-items-center">
+      <img src="{% static '/img/logo-header.svg'%}" alt="">
+      <span class="d-none d-lg-block">SCOOPS 4 U</span>
+    </a>
+    <i class="ri-menu-4-line toggle-sidebar-btn ms-1 me-3" style="font-size: 20px; font-weight: 500; color:#001BDE;"></i>
+  </div><!-- End Logo -->
+  
+  <div class="search-bar mx-auto">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="ri-search-line"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+  
+  <div class="POS POS-header">
+      <a href="{% url 'reseller_site:add_cart'  %}">Order</a>
+    </div>
+    <!-- End POS -->
+  
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="ri-search-line"></i>
+        </a>
+      </li><!-- End Search Icon-->
+  
+      <li class="nav-item dropdown pe-3">
+  
+        <a class="nav-link nav-profile d-flex align-items-center me-3" href="#" data-bs-toggle="dropdown">
+          <i alt="Profile" class="ri-checkbox-blank-circle-fill"></i>
+          <span class="d-none d-md-block dropdown-toggle ps-2" style="text-transform: capitalize;">
+            {{ user }}
+          </span>
+        </a><!-- End Profile Image Icon -->
+  
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-2">
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{% url 'admin_site:my_profile' %}">
+              <i class="ri-user-line"></i>              
+              <span>My Profile</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{%  url 'landing_page:logout' %}">
+              <i class="ri-logout-box-r-line"></i>              
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+  
+    </ul>
+  </nav><!-- End Icons Navigation -->
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'reseller_site:dashboard'%}">
+          <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Dashboard</span>
+          </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-heading pt-3">Management</li>
+      <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'reseller_site:transaction_orders'  %}">
+          <i class="ri-shopping-bag-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Orders</span>
+      </a>
+      </li><!-- End Products Page Nav -->
+
+      <li class="nav-heading pt-3">Others</li>
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
+              <i class="ri-settings-3-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Settings</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="settings-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+              <a href="{% url 'admin_site:settings_profile' %}">
+                      <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Edit Profile</span>
+              </a>
+              </li>
+          </ul>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link collapsed">
+              <i class="ri-information-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Support</span>
+          </a>
+      </li>
+  </ul>
+</aside><!-- End Sidebar-->
+{% endif %}
+
+{% if user.role == "rider"%}
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="{% url 'rider_site:dashboard'%}" class="logo d-flex align-items-center">
+      <img src="{% static '/img/logo-header.svg'%}" alt="">
+      <span class="d-none d-lg-block">SCOOPS 4 U</span>
+    </a>
+    <i class="ri-menu-4-line toggle-sidebar-btn ms-1 me-3" style="font-size: 20px; font-weight: 500; color:#001BDE;"></i>
+  </div><!-- End Logo -->
+  
+  <div class="search-bar mx-auto">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="ri-search-line"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+  
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="ri-search-line"></i>
+        </a>
+      </li><!-- End Search Icon-->
+  
+      <li class="nav-item dropdown pe-3">
+  
+        <a class="nav-link nav-profile d-flex align-items-center me-3" href="#" data-bs-toggle="dropdown">
+          <i alt="Profile" class="ri-checkbox-blank-circle-fill"></i>
+          <span class="d-none d-md-block dropdown-toggle ps-2" style="text-transform: capitalize;">
+            {{ user }}
+          </span>
+        </a><!-- End Profile Image Icon -->
+  
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile p-2">
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{% url 'admin_site:my_profile' %}">
+              <i class="ri-user-line"></i>              
+              <span>My Profile</span>
+            </a>
+          </li>
+  
+          <li>
+            <a class="dropdown-item d-flex align-items-center justify-content-center" href="{%  url 'landing_page:logout' %}">
+              <i class="ri-logout-box-r-line"></i>              
+              <span>Sign Out</span>
+            </a>
+          </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+  
+    </ul>
+  </nav><!-- End Icons Navigation -->
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+          <a class="nav-link" href="{% url 'rider_site:dashboard'%}">
+          <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Dashboard</span>
+          </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-heading pt-3">Management</li>
+      <li class="nav-item">
+      <a class="nav-link collapsed" href="{% url 'rider_site:transaction_orders'  %}">
+          <i class="ri-truck-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+          <span>Delivery</span>
+      </a>
+      </li><!-- End Products Page Nav -->
+
+      <li class="nav-heading pt-3">Reports</li>
+      <li class="nav-item">
+          <a class="nav-link collapsed" href="{% url 'rider_site:transaction_orders'  %}">
+              <i class="ri-file-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
+              <span>Delivery Report</span>
+          </a>
+      </li><!-- End Reports Page Nav -->
+
+      <li class="nav-heading pt-3">Others</li>
+      <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#settings-nav" data-bs-toggle="collapse" href="#">
+              <i class="ri-settings-3-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Settings</span><i class="ri-arrow-down-s-line ms-auto" style="font-size: 20px; font-weight: 100;" ></i>
+          </a>
+          <ul id="settings-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+              <a href="{% url 'admin_site:settings_profile' %}">
+                      <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>Edit Profile</span>
+              </a>
+              </li>
+          </ul>
+      </li>
+
+      <li class="nav-item">
+          <a class="nav-link collapsed">
+              <i class="ri-information-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i><span>Support</span>
+          </a>
+      </li>
+  </ul>
+</aside><!-- End Sidebar-->
+{% endif %}
+
+
+<div class="">
+  <div class="">
+      <div class="">
+          {% block content %}
+
+          {% endblock content %}
+      </div>
+  </div>
+</div>
+
+<div class="">
+  {% block template %}
+
+  {% endblock template %}
+</div>
+    
+<!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script> -->
+
+<!-- Vendors -->
+<!-- <script src="../../static/css/assets/apexcharts/apexcharts.min.js"></script> -->
+<script src="{% static '/css/assets/apexcharts/apexcharts.min.js' %}" alt=""></script>
+
+<!-- <script src="../../static/css/assets/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+<script src="{% static '/css/assets/bootstrap/js/bootstrap.bundle.min.js' %}" alt=""></script>
+
+<!-- <script src="../../static/css/assets/simple-datatables/simple-datatables.js"></script> -->
+<script src="{% static '/css/assets/simple-datatables/simple-datatables.js' %}" alt=""></script>
+
+<!-- Template Main JS File -->
+<!-- <script src="../../static/css/assets/js/main.js"></script> -->
+<script src="{% static '/css/assets/js/main.js' %}" alt=""></script>
+<script src="{% static '/js/active_page.js' %}" alt=""></script>
+
+
+</body>
+</html>
