@@ -1,16 +1,202 @@
 {% extends 'admin_site/base.html' %}
 
 {% block title %}
-    add stock
+    INVENTORY
 {% endblock title %}
 
 {% block content %}
 
 
+<main id="main" class="main mt-5">
+    <div class="pagetitle">
+        <h1>Add Stock</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'admin_site:dashboard'%}">Home</a></li>
+                <li class="breadcrumb-item">Inventory</li>
+                <li class="breadcrumb-item active">Add Stock</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-{% for messsage in messages  %}
-<p class='alert alert-success mt-3'>{{messsage}}</p>
-{% endfor %}
+    {% for messsage in messages  %}
+    <p class='alert alert-success mt-3'>{{messsage}}</p>
+    {% endfor %}
+    
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body mt-3">
+                        <div class="add-product mb-4">
+                            <h5 class="card-title feature">All Products</h5>
+                            <a href="{% url 'admin_site:add_reseller' %}" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addReseller"><i class="ri-add-line align-middle me-2 text-end" style="font-size:17px; font-weight: 500;"></i><span class="align-middle pe-1">Add New Stock</span></a>
+                            <form class="search-tab" action="{% url 'admin_site:search_inventory' %}" method="GET"  class="text-end px-4">
+                                {% csrf_token %}
+                                <input type="text" class="form-control p-2 ps-3" name="search" placeholder="Search">
+                                <button class="btn btn-search btn-sm" type="submit"><i class="ri-search-line"></i></button>
+                            </form>  
+                        </div> 
+
+                        <div class="modal fade border-0" id="addReseller" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered ">
+                                <div class="modal-content border-0 p-4">
+                                    <div class="modal-header border-0">
+                                        <h1 class="modal-title" id="exampleModalLabel">New Reseller</h1>
+                                        <button type="button" class="ri-close-fill" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+
+                                    <form action="{% url 'admin_site:add_reseller' %}" method="POST">
+                                            {% csrf_token %}
+                                            <div class="modal-body pt-2 mt-0">
+                                                <!-- {% for message in  messages %}
+                                                    <p class="alert alert-success  mt-1">{{ message }}</p>
+                                                {% endfor %}
+                                                <form action="{% url 'admin_site:add_product' %}" method="POST">
+                                                        {% csrf_token %} -->
+                                                    <label for="first name">First Name</label>
+                                                    <input type="text" placeholder="" name="fname" class="form-control" required>
+    
+                                                    <label for="middle name">Middle Name</label>
+                                                    <input type="text" placeholder="" name="mname" class="form-control" required>
+    
+                                                    <label for="last name">Last Name</label>
+                                                    <input type="text" placeholder="" name="lname" class="form-control" required>
+
+                                                    <!-- this should be sex not gender -->
+                                                    <label for="sex">Sex</label>
+                                                    <select name="gender" class="form-control" id="gender" required >
+                                                        <option ></option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+
+                                                    <label for="contact">Contact No.</label>
+                                                    <input type="number" placeholder="" name="cnum" min="0" class="form-control" required>
+    
+                                                    <label for="address">Address</label>
+                                                    <input type="text" placeholder="" name="address" class="form-control" required>
+                                                    <!-- <textarea type="text" placeholder="" name="address" class="form-control" required></textarea> -->
+
+                                                    <label for="last name">Email</label>
+                                                    <input type="email" placeholder="" name="email" class="form-control" required>
+    
+                                                    <label for="valid-ID">Valid ID</label>
+                                                    <input type="file" placeholder="" name="valid-ID" accept=".jpg, .jpeg, .png, .pdf" class="form-control custom" required>
+                                                    
+                                                    <label for="bus-Permit">Business Permit</label>
+                                                    <input type="file" placeholder="" name="Business-permit" accept=".jpg, .jpeg, .png, .pdf" class="form-control custom" required>
+                                                <!-- </form> -->
+                                            </div>
+                                            <div class="modal-footer border-0">
+                                                <!-- <button type="submit" class="btn btn-primary" value="Add Product"><i class="ri-check-fill"></i>Add Product</button> -->
+                                                <button type="submit" class="btn btn-primary me-2"><i class="ri-check-line align-middle me-2 text-end" style="font-size:17px;"></i><span class="align-middle pe-1">Add</span></button>
+                                                <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal"><i class="ri-close-line align-middle me-2 text-end" style="font-size:17px;"></i><span class="align-middle pe-1">Cancel</span></button>
+                                            </div>
+                                    </form>    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Table with hoverable rows -->
+                        {% if list_products %}
+                        <table class="table table-hover table-responsive">
+                            <thead>
+                            <tr class="align-middle">
+                                <th scope="col">Product Code</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Batch Number</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Contact No</th>
+                                <th scope="col" >Address</th>
+                                <th scope="col" >Email</th>
+                                <th scope="col" >Valid ID</th>
+                                <th scope="col" >Business Permit</th>
+                                <th scope="col" >Status</th>
+                                <th scope="col" >Action</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                                {% for list in list_reseller %}
+                                <tr class="align-middle">
+                                    <td>{{ list.reseller_fname }}</td>
+                                    <td>{{ list.reseller_mname }}</td>
+                                    <td>{{ list.reseller_lname }}</td>
+                                    <td>{{ list.reseller_gender }}</td>
+                                    <td>{{ list.reseller_contact }}</td>
+                                    <td>{{ list.reseller_address }}</td>
+                                    <td>{{ list.reseller_email }}</td>
+                                    <td><i class="ri-eye-fill btn-edit"  data-bs-toggle="modal" data-bs-target="#viewPic"></i></a></td>
+                                    
+                                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><i class="ri-eye-fill btn-edit"></i></a></td>
+                                    <!-- <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_id}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
+                                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_businessp}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td> -->
+                                    <td><span class="badge rounded-pill bg-primary">{{ list.reseller_status }}</span></td>
+                                <td>
+                                    <form method="POST" action="{% url 'admin_site:archive_reseller'  list.id %}" onsubmit="return submitForm(this);">
+                                        {% csrf_token %}
+                                        <button name="submit" class="btn btn-archive"><i class="ri-archive-fill"></i></button>
+                                        <!-- <a href="" type="submit" class="btn btn-archive"><i class="ri-archive-fill"></i></a> -->
+                                    </form>
+                                    <script>
+                                        function submitForm(form) {
+                                            swal({
+                                                title: "Archive",
+                                                text: "Do you really want to archive this reseller?",
+                                                icon: "warning",
+                                                buttons: true,
+                                                dangerMode: true,
+                                            })
+                                            .then(function (isOkay) {
+                                                if (isOkay) {
+                                                    form.submit();
+                                                }
+                                            });
+                                            return false;
+                                        }
+                                    </script>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        {% endif %}
+                        <!-- End Table with hoverable rows -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <form action="{% url 'admin_site:search_inventory' %}" method="GET" class="my-2">
     {% csrf_token %}
     <div class="input-group">

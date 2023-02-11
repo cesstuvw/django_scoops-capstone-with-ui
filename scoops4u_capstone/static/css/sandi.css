@@ -436,6 +436,7 @@ h1{
   transform: rotate(180deg);
 }
 
+
 .sidebar-nav .nav-content {
   padding: 5px 0 0 0;
   margin: 0;
@@ -714,7 +715,12 @@ background-color: transparent;
 padding: 0;
 margin-right: 10px;
 text-decoration: none;
-color: var(--primary-c-grey-text);
+color: var(--primary-c-grey-text) !important;
+}
+
+.btn-edit:hover,
+.btn-archive:hover{
+  color: var(--primary-c-dark-blue) !important;
 }
 
 .btn-back{
@@ -769,7 +775,9 @@ tr{
   border-bottom: 1px solid var(--primary-c-grey-text) !important;
 }
 
-input, select{
+input, 
+select, 
+textarea{
   font-size: 15px !important;
   color: var(--primary-c-dark-blue) !important;
   border-color: #E5E8F8 !important;
@@ -1102,7 +1110,7 @@ input, select{
 .btn-search{
   position: absolute;
   right: 40px;
-  top: 57px;
+  top: 50px;
   color: var(--primary-c-grey-text);
 }
 
@@ -1118,6 +1126,8 @@ input, select{
 
 .modal-title{
   font-family: P-SemiBold !important;
+  font-size: 2rem;
+  color: var(--primary-c-blue);
 }
 
 .modal button{
@@ -1148,14 +1158,16 @@ input, select{
   font-size: 14.5px;
 }
 
-.modal-footer button{
+.modal-footer button,
+.col-md-6 button{
   font-size: 14.5px !important;
   padding: 4px 12px 4px 12px;
 
   color: var(--primary-c-blue);
 }
 
-.modal-footer .btn-primary{
+.modal-footer .btn-primary,
+.col-md-6 .btn-primary{
   color: var(--primary-c-white-text);
   background-color: var(--primary-c-blue);
   border: none;
@@ -1163,7 +1175,8 @@ input, select{
   font-family: P-Medium !important;
 }
 
-.modal-footer .btn-secondary{
+.modal-footer .btn-secondary,
+.col-md-6 .btn-secondary{
   background-color: var(--c-l-purple);
   border: none;
   border-radius: 5px !important;
@@ -1171,14 +1184,27 @@ input, select{
 }
 
 /* FIX COLORS */
-.modal-footer .btn-primary:hover{
+.modal-footer .btn-primary:hover,
+.col-md-6 .btn-primary:hover{
   color: var(--primary-c-white-text);
   background-color: var(--c-d-purple);
 }
 
-.modal-footer .btn-secondary:hover{
+.col-md-6 .btn-primary{
+  justify-content: flex-end;
+}
+
+.modal-footer .btn-secondary:hover,
+.col-md-6 .btn-secondary:hover{
   background-color: #9fa5e6 !important;
   color: var(--primary-c-white-text);
 }
 
+.custom::-webkit-file-upload-button{
+  background-color: var(--primary-c-blue);
+  color: var(--primary-c-white-text);
+  padding: 10px;
+  font-size: 14px;
+  font-family: P-Medium;
+}
 

@@ -149,7 +149,7 @@
                 </a>
           </li>
           <li>
-                <a href="">
+                <a href="{% url 'admin_site:view_inventory' %}">
                     <i class="ri-checkbox-blank-circle-fill" style="margin-right: 15px" ></i><span>View Stock</span>
                 </a>
           </li>
@@ -314,7 +314,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
           <li class="nav-item">
-              <a class="nav-link" href="{% url 'staff_site:dashboard'%}">
+              <a class="nav-link collapsed" href="{% url 'staff_site:dashboard'%}">
               <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
               <span>Dashboard</span>
               </a>
@@ -444,7 +444,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-          <a class="nav-link" href="{% url 'reseller_site:dashboard'%}">
+          <a class="nav-link collapsed" href="{% url 'reseller_site:dashboard'%}">
           <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
           <span>Dashboard</span>
           </a>
@@ -544,7 +544,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-          <a class="nav-link" href="{% url 'rider_site:dashboard'%}">
+          <a class="nav-link collapsed" href="{% url 'rider_site:dashboard'%}">
           <i class="ri-apps-2-line" style="font-size: 22px; font-weight: 100; margin-right: 20px"></i>
           <span>Dashboard</span>
           </a>
