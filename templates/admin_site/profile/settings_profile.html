@@ -2,96 +2,164 @@
 
 
 {% block template %}
-    <h4>My Profile</h4>
-    <br>
-        
-        {% if list_profile %}
-        
-        {% for list in list_profile %}
-         
-        <div class="input-group">
-            <div class="input-group-append">
-                <form action="{% url 'admin_site:update_profile' list.id %}" method="POST" enctype="multipart/form-data" >
-                    {% csrf_token %}
-                <img src="/media/{{ list.profile_pic}}" alt="Profile-pic" width="200" class="rounded-circle">
-                <br>
-                <input type="file"  name="profile_pic" >
-                <br>
-                <br>
-          
-                <label for="">First Name</label>
-                <input type="text"  name="first" class="form-control" value="{{ list.profile_fname}}" required>
-         
-                <label for="">Middle Name</label>
-                <input type="text"  name="middle" class="form-control" value="{{ list.profile_mname}}" required>
-        
-                <label for="">Last Name</label>
-                <input type="text"  name="last" class="form-control" value="{{ list.profile_lname}}" required>
-    
-                <label for="">Contact No</label>
-                <input type="number"  name="contact_no" class="form-control" value="{{ list.profile_cnumber}}" required>
-      
-                <label for="">Address</label>
-                <input type="text"  name="address" class="form-control"value="{{ list.profile_address}}" required>
-      
-                <label for="">Email Address</label>
-                <input type="text"  name="email" class="form-control" value="{{ list.profile_email}}" required>
-                <br>
-                <input type="submit"  class="btn btn-dark"  value="Update" required>
-                </form>
-            </div>
-            {% endfor %}
-            {% else %}
-            <div class="input-group">
-                <div class="input-group-append">
-                    <form action="{% url 'admin_site:add_profile' %}" method="POST" enctype="multipart/form-data" >
-                        {% csrf_token %}
+<main id="main" class="main mt-5">
+    <div class="pagetitle">
+        <h1>Settings</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'admin_site:dashboard'%}">Home</a></li>
+                <li class="breadcrumb-item">Settings</li>
+                <li class="breadcrumb-item active">Edit Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-                    <input type="file" name="profile_pic" class="form-control">
-                    <br>
-                    <br>
-                    <label for="">First Name</label>
-                    <input type="text"  name="first" class="form-control" value="" required>
-             
-                    <label for="">Middle Name</label>
-                    <input type="text"  name="middle" class="form-control" required>
-            
-                    <label for="">Last Name</label>
-                    <input type="text"  name="last" class="form-control" required>
+    <section class="section ">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body mt-3">
+                        <div class="add-product mb-4">
+                            <h5 class="card-title feature">My Profile</h5>
+                            <!-- <a href="{% url 'admin_site:add_product' %}" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="ri-add-line align-middle me-2 text-end" style="font-size:17px; font-weight: 500;"></i><span class="align-middle pe-1">Add a New Product</span></a>
+                            <form class="search-tab" action="{% url 'admin_site:search_product' %}" method="GET"  class="text-end px-4">
+                                {% csrf_token %}
+                                <input type="text" class="form-control p-2 ps-3" name="search" placeholder="Search">
+                                <button class="btn btn-search btn-sm" type="submit"><i class="ri-search-line"></i></button>
+                            </form>   -->
+                        </div> 
+                        
+                        <div class="row">
+                            <div class="col-lg-12">
+                                {% if list_profile %}
         
-                    <label for="">Contact No</label>
-                    <input type="number"  name="contact_no" class="form-control" required>
-          
-                    <label for="">Address</label>
-                    <input type="text"  name="address" class="form-control" required>
-          
-                    <label for="">Email Address</label>
-                    <input type="text"  name="email" class="form-control" required>
-                    <br>
-                    <input type="submit"  class="btn btn-dark"  value="Save" required>
-                    </form>
+                                {% for list in list_profile %}
+                                 
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <form action="{% url 'admin_site:update_profile' list.id %}" method="POST" enctype="multipart/form-data" >
+                                            {% csrf_token %}
+                                        <img src="/media/{{ list.profile_pic}}" alt="Profile-pic" width="200" class="rounded-circle">
+                                        <br>
+                                        <input type="file"  name="profile_pic" >
+                                        <br>
+                                        <br>
+                                  
+                                        <label for="">First Name</label>
+                                        <input type="text"  name="first" class="form-control" value="{{ list.profile_fname}}" required>
+                                 
+                                        <label for="">Middle Name</label>
+                                        <input type="text"  name="middle" class="form-control" value="{{ list.profile_mname}}" required>
+                                
+                                        <label for="">Last Name</label>
+                                        <input type="text"  name="last" class="form-control" value="{{ list.profile_lname}}" required>
+                            
+                                        <label for="">Contact No</label>
+                                        <input type="number"  name="contact_no" class="form-control" value="{{ list.profile_cnumber}}" required>
+                              
+                                        <label for="">Address</label>
+                                        <input type="text"  name="address" class="form-control"value="{{ list.profile_address}}" required>
+                              
+                                        <label for="">Email Address</label>
+                                        <input type="text"  name="email" class="form-control" value="{{ list.profile_email}}" required>
+                                        <br>
+                                        <!-- <input type="submit"  class="btn btn-dark"  value="Update" required> -->
+                                        <button type="submit"  class="btn btn-profile">Update</button>
+                                        </form>
+                                    </div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="input-group">
+                                        <div class="input-group-append">
+                                            <form action="{% url 'admin_site:add_profile' %}" method="POST" enctype="multipart/form-data" >
+                                                {% csrf_token %}
+                        
+                                            <input type="file" name="profile_pic" class="form-control">
+                                            <br>
+                                            <br>
+                                            <label for="">First Name</label>
+                                            <input type="text"  name="first" class="form-control" value="" required>
+                                     
+                                            <label for="">Middle Name</label>
+                                            <input type="text"  name="middle" class="form-control" required>
+                                    
+                                            <label for="">Last Name</label>
+                                            <input type="text"  name="last" class="form-control" required>
+                                
+                                            <label for="">Contact No</label>
+                                            <input type="number"  name="contact_no" class="form-control" required>
+                                  
+                                            <label for="">Address</label>
+                                            <input type="text"  name="address" class="form-control" required>
+                                  
+                                            <label for="">Email Address</label>
+                                            <input type="text"  name="email" class="form-control" required>
+                                            <br>
+                                            <input type="submit"  class="btn btn-dark"  value="Save" required>
+                                            </form>
+                                        </div>
+                        
+                                    {% endif %}
+                        
+                                    <!-- <div class="input-group-append px-5">
+                                        <form action=""></form>
+                                        <h3>Change Password</h3>
+                                        <label for="">old password</label>
+                                        <input type="text"  name="contact" class="form-control" required>
+                              
+                                        <label for="">New password1</label>
+                                        <input type="text"  name="Address" class="form-control" required>
+                        
+                                        <label for="">New password2</label>
+                                        <input type="text"  name="Address" class="form-control" required>
+                                        <br>
+                                        <input type="submit"  class="btn btn-reg"  value="Save" required>
+                                        <button type="submit"  class="btn btn-profile">Save</button>
+                                        </form>
+                                    </div> -->
+                                </div>
+                            
+                            </div>
+                            <!-- <div class="col-lg-2"></div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-3"></div> -->
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-            {% endif %}
-
-            <div class="input-group-append px-5">
-                <form action=""></form>
-                <h3>Change Password</h3>
-                <label for="">old password</label>
-                <input type="text"  name="contact" class="form-control" required>
-      
-                <label for="">New password1</label>
-                <input type="text"  name="Address" class="form-control" required>
-
-                <label for="">New password2</label>
-                <input type="text"  name="Address" class="form-control" required>
-                <br>
-                <input type="submit"  class="btn btn-dark"  value="Save" required>
-                </form>
+            </div>
+            
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body mt-3">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="p-2">
+                                    <form action=""></form>
+                                        <h3>Change Password</h3>
+                                        <label for="">Old password</label>
+                                        <input type="text"  name="contact" class="form-control" required>
+                                    
+                                        <label for="">New Password</label>
+                                        <input type="text"  name="Address" class="form-control" required>
+                                    
+                                        <label for="">Re-type New Password</label>
+                                        <input type="text"  name="Address" class="form-control" required>
+                                        <br>
+                                        <!-- <input type="submit"  class="btn btn-reg"  value="Save" required> -->
+                                        <button type="submit"  class="btn btn-profile">Save</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    
-
+    </section>
+</main>
 
 {% endblock template %}
     

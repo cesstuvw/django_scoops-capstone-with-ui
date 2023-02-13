@@ -109,7 +109,8 @@ input::-webkit-inner-spin-button {
 
 body{
   font-family: P-Light;
-  color: var(--primary-c-white-text);
+  /* color: var(--primary-c-white-text); */
+  color: var(--primary-c-blue);
   background-color: var(--bg-c-gray-blue);
 }
 
@@ -1208,3 +1209,74 @@ textarea{
   font-family: P-Medium;
 }
 
+td .form-control{
+  max-height: 1.8rem;
+  max-width: 15rem;
+}
+
+.text-muted{
+  color: var(--primary-c-blue) !important;
+  font-family: P-Light !important;
+}
+
+.product-code h5{
+  color: var(--primary-c-blue);
+}
+
+.product-code{
+  color: var(--primary-c-dark-blue);
+}
+
+.card-product{
+  font-family: P-ExtraLight;
+  line-height: 26%;
+  /* margin-top: -1rem; */
+} 
+
+.card-product-name{
+  font-family: P-SemiBold;
+  color: var(--primary-c-blue);
+  font-size: 1.2rem;
+}
+
+.product-code span{
+  font-family: P-SemiBold;
+}
+
+.col-lg-4 .card-title{
+  padding: 0;
+}
+
+.bg-primary{
+  background-color: var(--c-l-purple) !important;
+  color: var(--primary-c-blue);
+}
+
+.product-code .bg-primary{
+  /* background-color: var(--c-l-purple) !important; */
+  color: var(--primary-c-white-text);
+  background-color: var(--primary-c-blue) !important;
+}
+
+.card-batch{
+  margin-top: 1rem;
+  color: var(--primary-c-blue);
+}
+
+.btn-reg{
+  background-color: var(--primary-c-blue);
+  color: var(--primary-c-white-text);
+  border: none;
+  font-family: P-SemiBold !important;
+}
+
+.register label{
+  font-family: P-Medium;
+  color: var(--primary-c-dark-blue);
+}
+
+.btn-profile{
+  font-family: P-Light;
+  background-color: var(--primary-c-blue);
+  color: var(--primary-c-white-text);
+}

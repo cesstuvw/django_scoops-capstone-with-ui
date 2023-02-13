@@ -2,10 +2,88 @@
 
 {% block content %}
 
-{% for messsage in messages  %}
+<!-- {% for messsage in messages  %}
 <p class='alert alert-success mt-3'>{{messsage}}</p>
-{% endfor %}
+{% endfor %} -->
 
+<main id="main" class="main mt-5">
+    <div class="pagetitle">
+        <h1>Settings</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'admin_site:dashboard'%}">Home</a></li>
+                <li class="breadcrumb-item">Settings</li>
+                <li class="breadcrumb-item active">Database</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    {% for messsage in messages  %}
+    <p class='alert alert-success mt-3'>{{messsage}}</p>
+    {% endfor %}
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body mt-3">
+                        <div class="add-product mb-4">
+                            <h5 class="card-title feature">Archived Users</h5>
+                            <!-- <a href="{% url 'admin_site:add_product' %}" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addProductModal"><i class="ri-add-line align-middle me-2 text-end" style="font-size:17px; font-weight: 500;"></i><span class="align-middle pe-1">Add a New Product</span></a> -->
+                            <form class="search-tab" action="{% url 'admin_site:search_reseller' %}" method="GET"  class="text-end px-4">
+                                {% csrf_token %}
+                                <input type="text" class="form-control p-2 ps-3" name="search" placeholder="Search">
+                                <button class="btn btn-search btn-sm" type="submit"><i class="ri-search-line"></i></button>
+                            </form>  
+                        </div> 
+
+                        <div class="table-responsive">
+                            {% if list_reseller %}
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr class="align-middle">
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Middle Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Sex</th>
+                                        <th scope="col">Contact No</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Valid ID</th>
+                                        <th scope="col">Business Permit</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for list in list_reseller %}
+                                    <tr>
+                                        <td>{{ list.reseller_fname }}</td>
+                                        <td>{{ list.reseller_mname }}</td>
+                                        <td>{{ list.reseller_lname }}</td>
+                                        <td>{{ list.reseller_gender }}</td>
+                                        <td>{{ list.reseller_contact }}</td>
+                                        <td>{{ list.reseller_address }}</td>
+                                        <td>{{ list.reseller_email }}</td>
+                                        <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_id}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
+                                        <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_businessp}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
+                                        
+                                        <td>{{ list.reseller_status }}</td>
+                                        <td><a href="{% url 'admin_site:retrieve_reseller'  list.id %}" class="btn btn-danger">Retrieve</a></td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- 
 <form action="{% url 'admin_site:search_reseller' %}" method="get" class="my-2">
     {% csrf_token %}
     <div class="input-group">
@@ -20,44 +98,7 @@
 
     
 
-    {% if list_reseller %}
-    <table class="table table-hover text-center">
-        <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Last Name</th>
-                <th>Gender</th>
-                <th>Contact No</th>
-                <th>Address</th>
-                <th>Email</th>
-                <th>Valid ID</th>
-                <th>Business Permit</th>
-                <th>Status</th>
-                <th>action</th>
-            </tr>
-            <tbody>
-                
-                {% for list in list_reseller %}
-                <tr>
-                    <td>{{ list.reseller_fname }}</td>
-                    <td>{{ list.reseller_mname }}</td>
-                    <td>{{ list.reseller_lname }}</td>
-                    <td>{{ list.reseller_gender }}</td>
-                    <td>{{ list.reseller_contact }}</td>
-                    <td>{{ list.reseller_address }}</td>
-                    <td>{{ list.reseller_email }}</td>
-                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_id}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
-                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_businessp}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
-                    
-                    <td>{{ list.reseller_status }}</td>
-                    <td><a href="{% url 'admin_site:retrieve_reseller'  list.id %}" class="btn btn-danger">Retrieve</a></td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </thead>
-    </table>
-    {% endif %}
+     -->
 {% endblock content %}
 
     

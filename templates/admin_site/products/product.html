@@ -77,42 +77,44 @@
                             </div>
                             
                             <!-- Table with hoverable rows -->
-                            <table class="table table-hover table-responsive">
-                                <thead>
-                                <tr class="align-middle">
-                                    <th scope="col">Product Code</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col">Product Category</th>
-                                    <th scope="col">Unit</th>
-                                    <th scope="col">Reseller Price</th>
-                                    <th scope="col" >POS Price</th>
-                                    <th scope="col" >Available Stock</th>
-                                    <th scope="col" >Status</th>
-                                    <th scope="col" >Action</th>
-                                </tr>
-                                </thead>
-                                {% if list_products %}
-                                <tbody>
-                                    {% for list in list_products %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
                                     <tr class="align-middle">
-                                        <td><a href="{% url 'admin_site:view_product' list.id %}" id="viewProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" class="text-decoration-none"><span >{{ list.product_code }}</span></a></td>
-                                        <td>{{ list.product_name }}</td>
-                                        <td>{{ list.product_category }}</td>
-                                        <td>{{ list.product_unit }}</td>
-                                        <td>{{ list.product_ResellerPrice }}</td>
-                                        <td>{{ list.product_price }}</td>
-                                        <td>{{ list.product_stock }}</td>
-                                        <td><span class="badge rounded-pill bg-primary">{{ list.product_status }}</span></td>
-                                    <td>
-                                        <form class="action"  method="POST">
-                                            <a href="#"class="btn btn-edit"><i class="ri-edit-fill"></i></a>
-                                        </form>
-                                    </td>
+                                        <th scope="col">Product Code</th>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Product Category</th>
+                                        <th scope="col">Unit</th>
+                                        <th scope="col">Reseller Price</th>
+                                        <th scope="col" >POS Price</th>
+                                        <th scope="col" >Available Stock</th>
+                                        <th scope="col" >Status</th>
+                                        <th scope="col" >Action</th>
                                     </tr>
-                                    {% endfor %}
-                                </tbody>
-                                {% endif %}
-                            </table>
+                                    </thead>
+                                    {% if list_products %}
+                                    <tbody>
+                                        {% for list in list_products %}
+                                        <tr class="align-middle">
+                                            <td><a href="{% url 'admin_site:view_product' list.id %}" id="viewProductModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" class="text-decoration-none"><span >{{ list.product_code }}</span></a></td>
+                                            <td>{{ list.product_name }}</td>
+                                            <td>{{ list.product_category }}</td>
+                                            <td>{{ list.product_unit }}</td>
+                                            <td>{{ list.product_ResellerPrice }}</td>
+                                            <td>{{ list.product_price }}</td>
+                                            <td>{{ list.product_stock }}</td>
+                                            <td><span class="badge rounded-pill bg-primary">{{ list.product_status }}</span></td>
+                                        <td>
+                                            <form class="action"  method="POST">
+                                                <a href="#"class="btn btn-edit"><i class="ri-edit-fill"></i></a>
+                                            </form>
+                                        </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    {% endif %}
+                                </table>
+                            </div>
                             <!-- End Table with hoverable rows -->
                         </div>
                     </div>

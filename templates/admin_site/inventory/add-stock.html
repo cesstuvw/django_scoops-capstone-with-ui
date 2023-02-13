@@ -30,7 +30,7 @@
                     <div class="card-body mt-3">
                         <div class="add-product mb-4">
                             <h5 class="card-title feature">All Products</h5>
-                            <a href="{% url 'admin_site:add_reseller' %}" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addReseller"><i class="ri-add-line align-middle me-2 text-end" style="font-size:17px; font-weight: 500;"></i><span class="align-middle pe-1">Add New Stock</span></a>
+                            <!-- <a href="{% url 'admin_site:add_reseller' %}" class="btn btn-add" data-bs-toggle="modal" data-bs-target="#addReseller"><i class="ri-add-line align-middle me-2 text-end" style="font-size:17px; font-weight: 500;"></i><span class="align-middle pe-1">Add New Stock</span></a> -->
                             <form class="search-tab" action="{% url 'admin_site:search_inventory' %}" method="GET"  class="text-end px-4">
                                 {% csrf_token %}
                                 <input type="text" class="form-control p-2 ps-3" name="search" placeholder="Search">
@@ -100,68 +100,41 @@
                         
                         <!-- Table with hoverable rows -->
                         {% if list_products %}
-                        <table class="table table-hover table-responsive">
-                            <thead>
-                            <tr class="align-middle">
-                                <th scope="col">Product Code</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Batch Number</th>
-                                <th scope="col">Quantity</th>
-                                <th scope="col">Contact No</th>
-                                <th scope="col" >Address</th>
-                                <th scope="col" >Email</th>
-                                <th scope="col" >Valid ID</th>
-                                <th scope="col" >Business Permit</th>
-                                <th scope="col" >Status</th>
-                                <th scope="col" >Action</th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                                {% for list in list_reseller %}
-                                <tr class="align-middle">
-                                    <td>{{ list.reseller_fname }}</td>
-                                    <td>{{ list.reseller_mname }}</td>
-                                    <td>{{ list.reseller_lname }}</td>
-                                    <td>{{ list.reseller_gender }}</td>
-                                    <td>{{ list.reseller_contact }}</td>
-                                    <td>{{ list.reseller_address }}</td>
-                                    <td>{{ list.reseller_email }}</td>
-                                    <td><i class="ri-eye-fill btn-edit"  data-bs-toggle="modal" data-bs-target="#viewPic"></i></a></td>
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="align-middle">
+                                            <th scope="col">Product Code</th>
+                                            <th scope="col">Product Name</th>
+                                            <th scope="col">Batch Number</th>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Expiry Date</th>
+                                            <th scope="col" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>  
+                                        {% for list in list_products %}   
+                                        <tr class="align-middle">
+                                            <td><a href="{% url 'admin_site:view_product' list.id %}" class="text-decoration-none">{{ list.product_code }}</a></td>
+                                            <td>{{ list.product_name }}</td>
+                                        <form action="{% url 'admin_site:update_inventory'  list.id %}" method="POST">
+                                            {% csrf_token %}
+                                            <td><input type="number" name="batch_no" class="form-control" placeholder="Enter Batch number" required></td>
+                                            <td><input type="number" name="quantity" class="form-control" style="text-align:right;" placeholder="0" required></td>
                                     
-                                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><i class="ri-eye-fill btn-edit"></i></a></td>
-                                    <!-- <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_id}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td>
-                                    <td><a href="{% url 'admin_site:viewing_pic' list.id %}"><img src="/media/{{ list.reseller_businessp}}" alt="Valid-ID" width="50" class="rounded-circle"></a></td> -->
-                                    <td><span class="badge rounded-pill bg-primary">{{ list.reseller_status }}</span></td>
-                                <td>
-                                    <form method="POST" action="{% url 'admin_site:archive_reseller'  list.id %}" onsubmit="return submitForm(this);">
-                                        {% csrf_token %}
-                                        <button name="submit" class="btn btn-archive"><i class="ri-archive-fill"></i></button>
-                                        <!-- <a href="" type="submit" class="btn btn-archive"><i class="ri-archive-fill"></i></a> -->
-                                    </form>
-                                    <script>
-                                        function submitForm(form) {
-                                            swal({
-                                                title: "Archive",
-                                                text: "Do you really want to archive this reseller?",
-                                                icon: "warning",
-                                                buttons: true,
-                                                dangerMode: true,
-                                            })
-                                            .then(function (isOkay) {
-                                                if (isOkay) {
-                                                    form.submit();
-                                                }
-                                            });
-                                            return false;
-                                        }
-                                    </script>
-                                </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        {% endif %}
+                                            <td><input type="date" class="form-control" name="expdate" required></td>
+                                            <!-- <td><input type="submit" value="add" class="btn btn-edit"></td> -->
+                                            <td><button type="submit" class="btn btn-edit align-middle"><i class="ri-add-circle-fill"></i></button></td>
+                                            <input type="hidden" value="{{ list.product_stock }}" name="stock" >
+                                            <input type="hidden" value="{{ list.product_code }}" name="product_code">
+                                            <input type="hidden" value="{{ list.product_name }}" name="product_name">
+                                        </form>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% endif %}
                         <!-- End Table with hoverable rows -->
                     </div>
                 </div>
@@ -186,66 +159,9 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-<form action="{% url 'admin_site:search_inventory' %}" method="GET" class="my-2">
-    {% csrf_token %}
-    <div class="input-group">
-        <input type="text" class="form-control" name="search" placeholder="search" required>
-        <div class="input-group-append">
-            <button class="btn btn-success" type="submit">Search</button>
-        </div>
-    </div>
-</form>
     
     
-{% if list_products %}
-<table class="table table-hover text-center">
-    
-    <thead>
-    <tr>
-        <th>Product Code</th>
-        <th>Product Name </th>
-        <th>Batch Number</th>
-        <th>Quantity</th>
-        <th>Expiry Date</th>
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>  
-        {% for list in list_products %}   
-    <tr>
-        <td><a href="{% url 'admin_site:view_product' list.id %}" class="text-decoration-none">{{ list.product_code }}</a></td>
-        <td>{{ list.product_name }}</td>
 
-    <form action="{% url 'admin_site:update_inventory'  list.id %}" method="POST">
-        {% csrf_token %}
-        <td><input type="number" name="batch_no" placeholder="Enter the  batch number" required></td>
-        <td><input type="number" name="quantity" style="text-align:right;" placeholder="0" required></td>
-
-        <td><input type="date" name="expdate" required></td>
-        <td><input type="submit" value="add" class="btn btn-dark"></td>
-        <input type="hidden" value="{{ list.product_stock }}" name="stock" >
-        <input type="hidden" value="{{ list.product_code }}" name="product_code">
-        <input type="hidden" value="{{ list.product_name }}" name="product_name">
-
-    </form>
-
-    </tr>
-    {% endfor %}
-            
-    </tbody>
-</table>
-{% endif %}
 
 
 {% endblock content %}
