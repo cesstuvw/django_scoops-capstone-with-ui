@@ -222,7 +222,8 @@ body {
 
 /* <!-- ================== START FOOTER ==================== -->*/
 footer{
-  height: 35%;
+  min-height: 45vh;
+  /* min-height: 35%; */
   background-color: var(--c-lighter-pink);
   color: var(--primary-c-blue);
   display: flex;

@@ -24,6 +24,23 @@ from admin_site.models import *
 def landing_page(request):
     return render(request, 'landing_page/index.html')
 
+    # flavors
+def flavors(request):
+    return render(request, 'landing_page/flavors.html')
+
+# about
+def about(request):
+    return render(request, 'landing_page/about.html')
+
+# contact
+def contact(request):
+    return render(request, 'landing_page/contact.html')
+
+# be-a-reseller
+def reseller(request):
+    return render(request, 'landing_page/be-a-reseller.html')
+
+
 
 # login process for multi user
 def loginView(request):

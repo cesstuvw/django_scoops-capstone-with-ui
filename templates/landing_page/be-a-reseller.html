@@ -1,0 +1,155 @@
+{% extends 'landing_page/base.html' %}
+
+{% block content %}
+    <!-- ====================== START MAIN NAVBAR ================================ -->
+    <header>
+        <nav class="navbar navbar-light bg-transparent fixed-top">
+            <div class="container d-flex justify-content-between  pt-5">
+                <a class="navbar-brand" href="{% url 'landing_page:landing_site' %}"><img src="../../static/img/logo-withname.svg" alt="Scoops 4 U"></a>
+                    <a class="navbar-sign-in d-none d-sm-block" href="{% url 'landing_page:login' %}">sign in</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span><img src="../../static/img/toggle-btn.svg" class="img-fluid" alt=""></span>
+                        </button>
+                    <div class=" collapse navbar-collapse no-scroll" id="navbarSupportedContent">
+                            <ul class="navbar-nav  mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'landing_page:login' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">sign in</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'landing_page:landing_site' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">home</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'landing_page:flavors' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">flavors</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'landing_page:about' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">about</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'landing_page:contact' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">contact</a>
+                                    </li>
+                                </ul>
+                    </div>
+            </div>
+        </nav>
+    </header>
+    <!-- ====================== END MAIN NAVBAR ================================ -->
+    <!-- ====================== START BANNER ================================ -->
+    <div class="first">
+        <div class="container reseller-main">
+            <div class="col category text-center">
+                <div class="row d-flex flex-column justify-content-center align-items-center">
+                    <div class="col contact-icon">
+                        <div><i class="ri-user-5-fill"></i></div>
+                    </div>
+                    <div class="col page-title">
+                        <h1 class="line-1 anim-typewriter">hi, reseller</h1>
+                    </div>
+                    <div class="col page-desc-res">
+                        <p>Greetings and welcome. Please kindly fill out the form, then wait for our confirmation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- ====================== END BANNER ================================ -->
+
+<!-- ====================== START CONTACT FORM ================================ -->
+<div class="container request-form">
+    <form>
+        <div class="col">
+            <div class="row  d-flex flex-column justify-content-center align-items-center">
+                <div class="col text-center request-title">
+                    <h1>Request Form</h1>
+                    <!-- <h1>Registration Form</h1> -->
+                    <p class="pt-4">Your data will be handled safely.</p>   
+                </div>
+                <div class="col pb-3"></div>
+                <div class="col">
+                    <div class="row form-group-inner">
+                        <div class="col-lg-3">
+                            <label for="">First Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="" aria-describedby="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Middle Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="" aria-describedby="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Last Name</label>
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" id="" aria-describedby="" required>                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Gender</label>
+                        </div>
+                        <div class="col gender">
+                            <!-- <input type="text" class="form-control" id="" aria-describedby="" required> -->
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected></option>
+                                <option value="1">F</option>
+                                <option value="2">M</option>
+                                <option value="3">Prefer not to say</option>
+                            </select>              
+                        </div>
+                        <div class="col-lg-3 tel-label">
+                            <label  for="">Contact No.</label>
+                        </div>
+                        <div class="col tel-no">
+                            <input type="tel" class="form-control" placeholder="" id="" aria-describedby="" pattern="[0]{1}[0-9]{3}[0-9]{3}[0-9]{4}" required>                        
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Address</label>
+                        </div>
+                        <div class="col">
+                            <textarea class="form-control" id="" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Email Address</label>
+                        </div>
+                        <div class="col">
+                            <input type="email" class="form-control" id="" aria-describedby="" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <label for="">Valid ID<span class="align-middle ps-3"><i class="ri-information-line"></i></span></label>
+                        </div>
+                        <div class="col ">
+                            <div class="row flex-row">
+                                <div class="col d-flex file">
+                                    <input type="file" class="form-control custom" id="" aria-describedby="" required>
+                                    <!-- <h6><span class="align-middle format">*pdf, png, jpg</span></h6> -->
+                                </div>
+                                <div class="col">
+                                </div>
+                            </div>
+                            <div class="col btn btn-send text-center w-75 p-0 mt-4">
+                                <a href="" class="form-control">Submit Inquiry</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- ====================== END CONTACT FORM ================================ -->
+
+
+
+{% endblock content %}

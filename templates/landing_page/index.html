@@ -2,7 +2,238 @@
 
 {% block content %}
 
-        <h1>hello po</h1>
+<!-- ====================== START NAVBAR  ================================ -->
+<header>
+        <nav class="navbar navbar-light bg-transparent fixed-top">
+                <div class="container d-flex justify-content-between  pt-5">
+                        <a class="navbar-brand" href="#"><img src="../../static/img/logo-withname.svg" alt="Scoops 4 U"></a>
+                        <a class="navbar-sign-in d-none d-sm-block" href="{% url 'landing_page:login' %}">sign in</a>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span><img src="../../static/img/toggle-btn.svg" class="img-fluid" alt=""></span>
+                        </button>
+                        <div class=" collapse navbar-collapse no-scroll" id="navbarSupportedContent">
+                                <ul class="navbar-nav  mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'landing_page:login' %}">sign in</a>
+                                        </li>
+                                        <li class="nav-item no-hover">
+                                                <a class="nav-link active "aria-current="page" href="{% url 'landing_page:landing_site' %}" data-bs-toggle="collapse" data-bs-target=".navbar-collapse.show">home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'landing_page:flavors' %}">flavors</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'landing_page:about' %}">about</a>
+                                        </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="{% url 'landing_page:contact' %}">contact</a>
+                                        </li>
+                                </ul>
+                        </div>
+                </div>
+        </nav>
 
-{% endblock content %}  
+<!-- ====================== START NAVBAR  ================================ -->
+
+<!-- ====================== END BANNER ================================ -->
+        <div class="landing-bg">
+                <section id="home">
+                        <div class="container container-text d-flex flex-column align-items-center justify-content-center">
+                                <div class="banner-text">
+                                        <h1>hello!</h1>
+                                </div>
+                                <div class="btn btn-arrow-down mt-5">
+                                        <a href="#home-flavors"><i class="ri-arrow-down-line"></i></a>
+                                </div>
+                        </div>
+                </section>
+        </div>
+</header>
+<!-- ====================== END BANNER ================================ -->
+
+<!-- ====================== START BEST FLAVORS ================================ -->
+<section id="home-flavors">
+        <div class="container">
+                <div class="row d-flex align-items-center justify-content-center">
+                        <div class="left col-lg-5 justify-content-center">
+                                <div class="row flex-column">
+                                        <div class="col">
+                                                <h1 class="title-section mb-5">best flavors</h1>
+                                                <p class="info-section mb-5">Here are our <span>best</span> ice cream <span>flavors</span>:</p>
+                                        </div>
+                                        <div class="col mt-2">
+                                                <h2 class="flavor-section mb-0" id="best-flavor">Avocado</h2>
+                                                <div class="row btn-fl">
+                                                        <div class="col btn btn-previous-fl p-0 m-0">
+                                                                <a href=""><i class="ri-arrow-left-circle-fill"></i></a>
+                                                        </div>
+                                                        <div class="col btn btn-next-fl m-0 p-0">
+                                                                <a href=""><i class="ri-arrow-right-circle-line"></i></a>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                        <div class="col mt-5 ms-3">
+                                                <!-- <h2 class="category-section" id="category-flavor"></h2> -->
+                                                <div class="row category-row p-0">
+                                                        <div class="col classic"></div>
+                                                        <div class="col special"></div>
+                                                        <div class="col deluxe"></div>
+                                                        <div class="col low-fat"></div>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="right col-lg-7 justify-content-center">
+                        </div>
+                </div>
+        </div>
+</section>
+<!-- ====================== END BEST FLAVORS ================================ -->
+
+<!-- ====================== START TAGLINE ================================ -->
+<section id="home-tagline">
+        <div class="container tagline">
+                <div class="row d-flex align-items-center">
+                        <div class="left col-lg-7">
+                                <div class="row flex-column">
+                                        <div class="col text-center">
+                                                <img src="../../static/img/tagline-photo.jpg"  class="img-fluid" alt="Ice cream on a cup glass with a spoon">
+                                        </div>
+                                </div>
+                        </div>
+                        <div class="right col-lg-5">
+                                <div class="row flex-column">
+                                        <div class="col tagline-open mb-5">
+                                                <i class="ri-double-quotes-l"></i>
+                                        </div>
+                                        <div class="col tagline-quote mb-5">
+                                                <p>Happy <span>scoops</span> for everyone!</p>
+                                        </div>
+                                        <div class="col btn btn-about-us mt-3 text-start">
+                                                <a href="">about us</a>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</section>
+<!-- ====================== END TAGLINE ================================ -->
+
+<!-- ====================== START BE A RESELLER ================================ -->
+<section id="home-reseller">
+        <div class="container reseller ">
+                <div class="row d-flex align-items-center">
+                        <div class="col">
+                                <div class="row row-upper flex-column">
+                                        <div class="col col-upper align-items-center text-start w-50">
+                                                <div class="title-group">
+                                                        <h1 class="upper-text">happy</h1>
+                                                        <h1 class="lower-text">scoops</h1>
+                                                </div>
+                                        </div>
+                                        <div class="col col-desc align-items-center justify-content-center">
+                                                <h1 class="text-center desc-text"><span>Ice cream</span> tastes better when shared with<span> loved ones.</span></h1>
+                                        </div>
+                                        <div class="col btn btn-reseller align-items-center">
+                                                <a href="">be a reseller</a>                    
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</section>
+<!-- ====================== END BE A RESELLER ================================ -->
+
+<!-- ====================== START ADDRESS ================================ -->
+<section id="home-store">
+        <div class="container store">
+                <div class="row d-flex align-items-center">
+                        <div class="col-lg-3 store-icon">
+                                <i class="ri-store-2-fill"></i>
+                        </div>
+                        <div class="col-lg-6 address-main-text">
+                                <h1 class="text-center">Visit us at our physical store.</h1>
+                                <div class="ellipse "></div>
+                        </div>
+                        <div class="col-lg-3 address-desc">
+                                <h3 class="address-start mb-0">#12 Filipinas Avenue</h3>
+                                <p class="address-cont">Brgy. Dulumbayan Teresa, Rizal</p>
+                                <div class="horizontal-line mt-3"></div>
+                        </div>
+                </div>
+        </div>
+</section>
+<!-- ====================== END ADDRESS ================================ -->
+
+<!-- ====================== START STORES ================================ -->
+<section id="home-res-store" class="container-fluid res-store">
+        <div class="row d-flex align-items-center">
+                <div class="col-lg-6 retailers text-center">
+                        <div class="row flex-column">
+                                <div class="col title-res-store">
+                                        <h3 class="">Our Resellers</h3>   
+                                </div>
+                                <div class="col title-res-store">
+                                        <p>store locations</p>                                        
+                                </div>
+                        </div>
+                </div>
+                <div class="col-lg-6">
+                        <div class="row flex-column">
+                                <div class="col-lg-12 top">
+                                        <div class="row top-con">
+                                                <div class="col-lg-3 res-icon">
+                                                        <i class="ri-store-3-line"></i>
+                                                </div>
+                                                <div class="col-lg-9 store-res">
+                                                        <h4>E&G Store</h4>
+                                                        <p>754 Manila E Rd, Morong, Rizal</p>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="col-lg-12 bottom">
+                                        <div class="row bottom-con">
+                                                <div class="col-lg-3 res-icon">
+                                                        <i class="ri-store-3-line"></i>
+                                                </div>
+                                                <div class="col-lg-9 store-res">
+                                                        <h4>Scoopers</h4>
+                                                        <p>496 Mabini St. Pililla, Rizal</p>
+                                                </div>
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</section>
+
+<section id="reviews">
+        <div class="container feedback">
+                <div class="col-lg-12">
+                        <div class="row">
+                                <div class="col-lg-12 text-center">
+                                        <h1>Customers’ Feedbacks</h1>
+                                </div>
+                                <div class="col-lg-4 text-center fb-card bg-success">
+                                        <div class="box">
+
+                                        </div>
+                                </div>
+                                <div class="col-lg-4 text-center fb-card bg-primary">
+                                        <div class="box">
+
+                                        </div>
+                                </div>
+                                <div class="col-lg-4 text-center fb-card bg-danger">
+                                        <div class="box">
+
+                                        </div>
+                                </div>
+                        </div>
+                </div>
+        </div>
+</section>
+
+<!-- ====================== END STORES ================================ -->
+{% endblock content %}
 
